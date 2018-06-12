@@ -6,6 +6,7 @@ paginate = 10
 # Enable gogle analytics by entering your tracking code
 googleAnalytics = ""
 theme = "hugo-minimalist-theme"
+publishDir = "docs"
 
 [params]
     site_author = "Oliver Schneider"

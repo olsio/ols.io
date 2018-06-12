@@ -1,0 +1,217 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ols.io</title>
+        <meta name="author">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="generator" content="Hugo 0.41" />
+        <link href="https://ols.io/post/index.xml" rel="alternate" type="application/rss+xml" title="ols.io" />
+        <link href="https://ols.io/post/index.xml" rel="feed" type="application/rss+xml" title="ols.io" />
+        <link href='//fonts.googleapis.com/css?family=Roboto:400,300,700|Noto+Serif:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://ols.io/css/styles.css">
+        <link rel="icon" href="https://ols.io/favicon.ico">
+        <link rel="apple-touch-icon" href="https://ols.io/apple-touch-icon.png" />
+        <link rel="stylesheet" href="https://ols.io/css/highlightjs/monokai.css">
+        <script src="https://ols.io/js/vendor/modernizr-2.8.0.min.js"></script>
+        
+        <style>
+        .site-header h2 .logo {
+        background: url(https://ols.io/images/cover.jpg) no-repeat 0 0;
+        }
+        @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+          .site-header h2 .logo {
+            background-image: url(https://ols.io/images/cover.jpg);
+        }}
+       .site-header {
+         background: #2a373d url(https://ols.io/images/cover.jpg) no-repeat center center;
+         z-index: -1;
+        }
+        </style>
+    </head>
+    <body>
+        
+        <header class="site-header">
+          <div class="transparent-layer">
+              <h2></h2>
+          </div>
+        </header>
+
+
+<div class="container clearfix">
+    <main role="main" class="content">
+        <article class="post">
+            <a class="btn home" href="https://ols.io/" title="Back to home">&laquo; Back to home</a>
+            
+<h1><a href="https://ols.io/post/object-orientation-in-swift-composition/" title="Object-orientation in Swift - Composition">Object-orientation in Swift - Composition</a></h1>
+
+<footer class="post-info">Posted on <span class="post-meta"><time datetime="2014.06.13">2014.06.13</time>
+
+</span>
+</footer>
+
+            
+
+<h2 id="tl-dr">tl;dr:</h2>
+
+<p>Quick example using classes and protocols in Swift.</p>
+
+<p><a href="https://github.com/olsio/swiftly"><strong>Source on github</strong></a></p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+
+<p>I am a Java developer and not native to Objective-C.</p>
+
+<p>I didn’t even spend a whole day learning Swift so everything stated here is probably wrong and not how Apple intended Swift to be used.</p>
+
+<p>But it is how I intend to use it.</p>
+
+<h2 id="composition-over-inheritance">Composition over inheritance</h2>
+
+<p>Learning design patterns mostly boils down to accepting that inheritance is pretty useless and that almost all patterns are based on the mantra <a href="http://en.wikipedia.org/wiki/Composition_over_inheritance">prefer composition over inheritance</a>.</p>
+
+<p>Done right this offers better:</p>
+
+<ul>
+<li>testing</li>
+<li>code reuse</li>
+<li>separation of concerns</li>
+</ul>
+
+<p>So don’t be afraid to create many files, classes and interfaces.</p>
+
+<h2 id="swift">Swift</h2>
+
+<p>Checking out Swift you can find all the ingredients required to build a nicely composed object (even more as we have extensions). But for now we need <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/ClassesAndStructures.html">classes</a> and <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Protocols.html">protocols</a> (basically interfaces in Apple talk).</p>
+
+<p>To check out the other cool stuff like <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/OptionalChaining.html">optionals</a>, <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Closures.html">closures</a> or <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/Extensions.html">extensions</a> just check out the  <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/index.html">Swift language guide</a>.</p>
+
+<h2 id="flying-dog">Flying Dog</h2>
+
+<p><img src="/images/2014/06/5173604051_e725834d11_z.jpg" alt="Flying dog" /></p>
+
+<p><a href="http://creativecommons.org/licenses/by-nc-sa/2.0/"><img src="/images/2014/06/80x15.png" alt="Creative Commons Attribution-Noncommercial-Share Alike 2.0 Generic License" /></a> by <a href="http://www.flickr.com/people/cjsmithphotography/">Chris Smith/Out of Chicago</a></p>
+
+<p>To draw up a quick example let’s create some animals and give them abilities. Nicely re-usable abilities obviously, who wants to work more than he has to?</p>
+
+<p>I chose the following animals:</p>
+
+<ul>
+<li>Dog</li>
+<li>Bird</li>
+<li>FlyingDog</li>
+</ul>
+
+<p>Knowing dogs, birds and flying dogs, we require some barking, chirping, walking and flying. This is where the magic of composition comes into play as barking and flying is something that can be shared between animals but only has to be implemented onces.</p>
+
+<ul>
+<li>Dogs &amp; FlyingDogs: <strong>Bark</strong></li>
+<li>Birds &amp; FlyingDogs: <strong>Fly</strong></li>
+</ul>
+
+<p>To make those abilities interchangeable and re-usable we need to create two protocols that define the abstract behaviour of making a sound and moving.</p>
+
+<script src="https://gist.github.com/olsio/20f9728ba7e0dbb874cc.js"></script>
+
+<p>Those protocols are very simple and only define a method each returning a String.</p>
+
+<p>Using that we can now look into some concrete implementations of those protocols.</p>
+
+<script src="https://gist.github.com/olsio/ee0adb01162647baa7c0.js"></script>
+
+<script src="https://gist.github.com/olsio/23f229727a365cefb3f7.js"></script>
+
+<p>Having the abilities covered we can create our animals. As each animal will be able to make a sound and move (plus being lazy) we start by creating an “abstract” animal that uses our protocols to do the actual sounding and moving. This way all “concrete” animals don’t have to do that work themselves.</p>
+
+<script src="https://gist.github.com/olsio/d0f0deb9724c11c79de8.js"></script>
+
+<p>As you can see the animal class can become any animal it likes to be by just switching abilities. Implementing a dog, bird and flying dog now becomes trivial.</p>
+
+<script src="https://gist.github.com/olsio/d507fd3b5bfac4fdba1f.js"></script>
+
+<p>By simply inheriting from animal we just have to override the default initialiser (constructor) of each animal and plug in the correct behaviours and pass it on to initialiser of our parent animal class.</p>
+
+<p>Last thing to (well normally should be first thing) is to write some unit tests to actually verify that what we just did actually works.</p>
+
+<script src="https://gist.github.com/olsio/ba10ad9a002fa410387e.js"></script>
+
+<p>We see that the dog barks, the bird flies and the flying dog barks and flies.</p>
+
+            <ul class="share-buttons">
+    <li>Share this article:</li>
+    <li>
+        <a class="icon-facebook-squared" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fols.io%2fpost%2fobject-orientation-in-swift-composition%2f" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook"></a>
+    </li>
+    <li>
+        <a class="icon-twitter" href="https://twitter.com/share?text=Object-orientation%20in%20Swift%20-%20Composition&amp;url=https%3a%2f%2fols.io%2fpost%2fobject-orientation-in-swift-composition%2f" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Tweet this article"></a>
+    </li>
+    <li>
+        <a class="icon-gplus" href="https://plus.google.com/share?url=https%3a%2f%2fols.io%2fpost%2fobject-orientation-in-swift-composition%2f" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google&#43;"></a>
+    </li>
+    <li>
+        <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fols.io%2fpost%2fobject-orientation-in-swift-composition%2f&title=Object-orientation%20in%20Swift%20-%20Composition" onclick="window.open(this.href, 'linkedin-share', 'width=600,height=494');return false;" title="Share on Linkedin"></a>
+    </li>
+</ul>
+
+        </article>
+        <div class="comments">
+            <h3>Comments</h3>
+            
+        </div>
+    </main>
+    <aside class="author">
+  <img class="profile-image" src="https://www.gravatar.com/avatar/3e176fcfc7fd1061ce69fec616eb1484" alt="Oliver Schneider" />
+  <p class="name">by 
+  <strong>Oliver Schneider</strong></p>
+  <p class="address">Lausanne</p>
+  <p class="link"></p>
+  <ul class="social">
+    
+<li><a href="//twitter.com/inbx" class="icon-twitter" target="_blank" title="Twitter"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li><a href="//github.com/olsio" class="icon-github" target="_blank" title="Github"></a></li>
+
+
+
+
+<li><a href="https://ols.io/post/index.xml" class="icon-rss" target="_blank" title="RSS"></a></li>
+
+  </ul>
+  <br><br>
+</aside>
+
+</div>
+
+<footer class="main-footer">
+  <div class="container clearfix">
+        <a class="icon-rss" href="https://ols.io/post/index.xml" title="RSS"></a>
+        <p>&copy; 2018 &middot; Powered by <a href="http://gohugo.io">Hugo</a>.</p>
+  </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script>window.jQuery || document.write('<script src="https:\/\/ols.io\/js\/vendor\/jquery-1.11.0.min.js"><\/script>')</script>
+<script src="https://ols.io/js/plugins.js"></script>
+
+
+
+
+</body>
+</html>
+

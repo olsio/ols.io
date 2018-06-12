@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ols.io</title>
+    <link>https://ols.io/</link>
+    <description>Recent content on ols.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 May 2015 12:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ols.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to make a class iterable in ES6</title>
+      <link>https://ols.io/post/how-to-make-a-class-iterable-in-es6/</link>
+      <pubDate>Sun, 17 May 2015 12:00:00 +0000</pubDate>
+      
+      <guid>https://ols.io/post/how-to-make-a-class-iterable-in-es6/</guid>
+      <description>ECMAScript 6 (ES6) introduced the concept of iterators. Iterators let you define custom ways to iterate or travers an object by either by calling next() or using the for..of construct.
+In order to add iterability you have to implement the Iterator as well as the Iterable interface in your class.
+interface Iterator { next() : IteratorResult; } interface IteratorResult { value: any; done: boolean; } interface Iterable { [System.iterator]() : Iterator; }  The semantics of next() are quite easy:</description>
+    </item>
+    
+    <item>
+      <title>Object-orientation in Swift - Composition</title>
+      <link>https://ols.io/post/object-orientation-in-swift-composition/</link>
+      <pubDate>Fri, 13 Jun 2014 12:00:00 +0000</pubDate>
+      
+      <guid>https://ols.io/post/object-orientation-in-swift-composition/</guid>
+      <description>tl;dr: Quick example using classes and protocols in Swift.
+Source on github
+Disclaimer I am a Java developer and not native to Objective-C.
+I didn’t even spend a whole day learning Swift so everything stated here is probably wrong and not how Apple intended Swift to be used.
+But it is how I intend to use it.
+Composition over inheritance Learning design patterns mostly boils down to accepting that inheritance is pretty useless and that almost all patterns are based on the mantra prefer composition over inheritance.</description>
+    </item>
+    
+    <item>
+      <title>Re-using common properties when defining multiple datasources in Grails</title>
+      <link>https://ols.io/post/re-using-common-properties-when-defining-multiple-datasources-in-grails/</link>
+      <pubDate>Tue, 21 Jan 2014 12:00:00 +0000</pubDate>
+      
+      <guid>https://ols.io/post/re-using-common-properties-when-defining-multiple-datasources-in-grails/</guid>
+      <description>tl;dr: Avoiding code duplication when defining multiple datasources in Grails.
+Long version One of my Grails applications has to connect to seven database instances that share many characteristics like driver, dialect, username and password which were all copy pasted in my first version.
+Example: 
+As you can see only the url parameter changes while the rest stays static and is wasted text.
+Shorter version To make it more compact and re-use the common part I found that you can define a closure which can be used to initialise each datasource entry.</description>
+    </item>
+    
+    <item>
+      <title>Subversion, Mercurial, ..., Profit!</title>
+      <link>https://ols.io/post/subversion-mercurial-profit/</link>
+      <pubDate>Tue, 24 Dec 2013 12:00:00 +0000</pubDate>
+      
+      <guid>https://ols.io/post/subversion-mercurial-profit/</guid>
+      <description>tl;dr: Workflow to use Subversion and Mercurial version control side by side.
+Preface Distributed source code management (DSCM) is very popular these days and might take over the world but the current reality is most companies still cling to centralized source control. Most often you will find Subversion (svn) or for the unlucky even CVS.
+I won&amp;rsquo;t reiterate the advantages of distributed vs. centralized version control but if you are interested watch this video of Linus Torvalds trashing SVN.</description>
+    </item>
+    
+  </channel>
+</rss>
